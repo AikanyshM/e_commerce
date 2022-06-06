@@ -1,0 +1,61 @@
+{% extends 'base.html'%}
+{% block content %}
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- section title -->
+        <div class="col-md-12">
+            <div class="section-title">
+                <h3 class="title">New Products</h3>
+            </div>
+        </div>
+        <!-- /section title -->
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Фото</th>
+                <th scope="col">Товар</th>
+                <th scope="col">Цвет</th>
+                <th scope="col">Количество</th>
+                <th scope="col">Общая цена</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+            {% for cart in carts %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+
+                <td>
+                    <div class="cart-img">
+                        <img src="{{ cart.item.item.main_image.url }}" alt="">
+                        
+                </td>
+                <td>{{ cart.item.item.name }}</td>
+                <td>{{ cart.item.color.name }}</td>
+                <td> <a href="{% url 'increase_quantity' cart.id %}"> + </a> {{ cart.quantity }} <a href="{% url 'decrease_quantity' cart.id %}"> - </a></td>
+                <td>{{ cart.get_final_price }}</td>
+              </tr>
+            {% endfor %}
+            <td>
+
+            <th scope="col"> Итого: </th>
+            <td></td>
+            <td></td>
+            <td><strong>{{ carts_count }}</strong></td>
+            <td><strong>{{ carts_total_price }}</strong></td>
+
+
+
+            </tbody>
+          </table>
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+{% endblock content %}
+

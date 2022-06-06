@@ -1,0 +1,39 @@
+<!-- product -->
+<div class="product">
+    <div class="product-img">
+        <img src="{{ item.main_image.url }}" alt="">
+        <div class="product-label">
+            {% if item.discount_price %}
+            <span class="sale">-{{ item.get_discount_percentage }}%</span>
+            {% endif %}
+            {% if item.is_new %}
+            <span class="new">NEW</span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="product-body">
+        <p class="product-category">{{ item.category.name }}}}</p>
+        <h3 class="product-name"><a href="{% url 'detail' item.id %}">{{ item.name }}</a></h3>
+        {% if item.discount_price %}
+        <h4 class="product-price">${{item.discount_price}} <del class="product-old-price">${{ item.price }}</del></h4>
+        {% else %}
+        <h4 class="product-price">${{ item.price }}</h4>
+        {% endif %}
+        <div class="product-rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+        </div>
+        <div class="product-btns">
+            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+        </div>
+    </div>
+    <div class="add-to-cart">
+        <a href="{% url 'add_to_cart' item.id %}"class="btn add-to-cart-btn"><i class="fa fa-shopping-cart"></i>В корзину</a>
+    </div>
+</div>
+<!-- /product -->

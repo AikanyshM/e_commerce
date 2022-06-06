@@ -1,0 +1,132 @@
+
+	{% extends 'base.html'%}
+	{% load static %}
+	{% block content %}
+	<!-- BREADCRUMB -->
+	<div id="breadcrumb" class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="breadcrumb-tree">
+						<li><a href="#">Home</a></li>
+						<li><a href="#">All Categories</a></li>
+						<li><a href="#">Accessories</a></li>
+						<li class="active">Headphones (227,490 Results)</li>
+					</ul>
+				</div>
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /BREADCRUMB -->
+
+	<!-- SECTION -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<!-- ASIDE -->
+				<div id="aside" class="col-md-3">
+					<form method="GET" action=".">
+					<!-- aside Widget -->
+					<div class="aside">
+						<h3 class="aside-title">Категории</h3>
+						<div class="checkbox-filter">
+							{% for category in categories %}
+							<div class="input-checkbox">
+								<input type="checkbox" id="category-{{category.id }}" name="category-{{ category.id }}">
+								<label for="category-{{ category.id }}">
+									<span></span>
+									{{ category.name }}
+									<small>({{ category.get_count }})</small>
+								</label>
+							</div>
+							{% endfor %}
+
+						</div>
+					</div>
+					<!-- /aside Widget -->
+
+					<!-- aside Widget -->
+					<div class="aside">
+						<h3 class="aside-title">Price</h3>
+						<div class="price-filter">
+							<div id="price-slider"></div>
+							<div class="input-number price-min">
+								<input id="price-min" type="number" name="price-min">
+								<span class="qty-up">+</span>
+								<span class="qty-down">-</span>
+							</div>
+							<span>-</span>
+							<div class="input-number price-max">
+								<input id="price-max" type="number" name="price-max">
+								<span class="qty-up">+</span>
+								<span class="qty-down">-</span>
+							</div>
+						</div>
+					</div>
+					<!-- /aside Widget -->
+
+					<!-- aside Widget -->
+					<div class="aside">
+						<h3 class="aside-title">Brand</h3>
+						<div class="checkbox-filter">
+							{% for brand in brands %}
+							<div class="input-checkbox">
+								<input type="checkbox" id="brand-{{ brand.id }}" name="brand-{{ brand.id }}">
+								<label for="brand-{{ brand.id }}">
+									<span></span>
+									{{ brand.name }}
+									<small>({{ brand.get_count }})</small>
+								</label>
+							</div>
+							{% endfor %}
+							
+						</div>
+					</div>
+					<!-- /aside Widget -->
+					<button class="btn-primary" type="submit">Поиск </button
+					</form>
+
+				</div>
+				<!-- /ASIDE -->
+
+				<!-- STORE -->
+				<div id="store" class="col-md-9">
+
+				<!-- store products -->
+					<div class="row">
+						{% for item in object_list %}
+						<!-- product -->
+						<div class="col-md-4 col-xs-6">
+							{% include 'single-product.html' %}
+						</div>
+						<!-- /product -->
+						{% endfor %}
+
+					<!-- store bottom filter -->
+					<div class="store-filter clearfix">
+						<span class="store-qty">Showing 20-100 products</span>
+						<ul class="store-pagination">
+							<li class="active">1</li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+						</ul>
+					</div>
+					<!-- /store bottom filter -->
+				</div>
+				<!-- /STORE -->
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /SECTION -->
+	{% endblock content %}
+
