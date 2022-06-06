@@ -36,7 +36,7 @@
                 </td>
                 <td>{{ cart.item.item.name }}</td>
                 <td>{{ cart.item.color.name }}</td>
-                <td> <a href="{% url 'increase_quantity' cart.id %}"> + </a> {{ cart.quantity }} <a href="{% url 'decrease_quantity' cart.id %}"> - </a></td>
+                <td> <a href="{% url 'increase_quantity' cart.id %}"><strong> + </strong> </a> {{ cart.quantity }} <a href="{% url 'decrease_quantity' cart.id %}"><strong> - </strong></a></td>
                 <td>{{ cart.get_final_price }}</td>
               </tr>
             {% endfor %}
