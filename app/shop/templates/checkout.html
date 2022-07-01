@@ -1,0 +1,73 @@
+{% extends 'base.html'%}
+{% block content %}
+<!-- SECTION -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<form method="POST" action="{% url 'make_order' %}">
+				{% csrf_token %}
+			<div class="col-md-7">
+				<!-- Billing Details -->
+				<div class="billing-details">
+					<div class="section-title">
+						<h3 class="title">Адрес доставки</h3>
+					</div>
+					<div class="form-group">
+						<input class="input" type="text" name="name" placeholder="ФИО">
+					</div>
+					<div class="form-group">
+						<input class="input" type="email" name="email" placeholder="Email">
+					</div>
+					<div class="form-group">
+						<input class="input" type="text" name="address" placeholder="Адрес">
+					</div>
+					<div class="form-group">
+						<input class="input" type="tel" name="tel" placeholder="Номер телефона">
+					</div>
+				</div>
+				<!-- /Billing Details -->
+
+				<!-- Order notes -->
+				<div class="order-notes">
+					<textarea class="input" name="notes" placeholder="Ваши комментарии"></textarea>
+				</div>
+				<!-- /Order notes -->
+			</div>
+
+			<!-- Order Details -->
+			<div class="col-md-5 order-details">
+				<div class="section-title text-center">
+					<h3 class="title">Ваш заказ</h3>
+				</div>
+				<div class="order-summary">
+					<div class="order-col">
+						<div><strong>Товар</strong></div>
+						<div><strong>Итого</strong></div>
+					</div>
+					<div class="order-products">
+						{% for cart in carts %}
+						<div class="order-col">
+							<div>{{ cart.quantity }}x {{ cart.item.item.name }}</div>
+							<div>${{ cart.get_final_price }}</div>
+						</div>
+						{% endfor %}
+					</div>
+					<div class="order-col">
+						<div><strong>Итого</strong></div>
+						<div><strong class="order-total">${{ carts_final_price }}</strong></div>
+					</div>
+				</div>
+				<button type="submit" class="primary-btn order-submit">Оформить заказ</button>
+			</div>
+			<!-- /Order Details -->
+		</form>
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /SECTION -->
+
+{% endblock content %}
