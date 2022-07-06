@@ -7,6 +7,7 @@ import telegram_send
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.db.models import Q
+from . import tasks
 
 
 class IndexView(ListView):
@@ -134,7 +135,7 @@ def make_order(request):
     if messages:
         messages.insert(0, f'Товар {cart.item.item.name} в количестве {cart.quantity} \
         по стоимости {cart.get_price()}, итого в сумме {cart.get_final_price()}')
-        telegram_send.send(messages=messages)
+        tasks.send_massive_telegram.delay(messages)
         return HttpResponseRedirect(reverse('index'))
 
 
